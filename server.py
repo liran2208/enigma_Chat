@@ -6,8 +6,6 @@ from _thread import start_new_thread
 import enigma
 from os import system
 
-
-
 """The first argument AF_INET is the address domain of the 
 socket. This is used when we have an Internet Domain with 
 any two hosts The second argument is the type of socket. 
@@ -22,13 +20,9 @@ if len(sys.argv) != 3:
 	print "Correct usage: script, IP address, port number"
 	exit()
 """
-# takes the first argument from command prompt as IP address
 IP_address = "0.0.0.0"
-# str(sys.argv[1])
 
-# takes second argument from command prompt as port number
-Port = 1234 # int(sys.argv[2])
-
+Port = 1234 
 """ 
 binds the server to an entered IP address and at the 
 specified port number. 
@@ -42,7 +36,7 @@ increased as per convenience.
 """
 server.listen(100)
 
-system('cls')
+system('cls') #clears the cmd
 print ("waiting for users...")
 
 
@@ -66,6 +60,7 @@ def clientthread(conn, addr):
 				else:
 					"""message may have no content if the connection 
 					is broken, in this case we remove the connection"""
+					
 					remove(conn)
 
 			except:
@@ -76,17 +71,15 @@ clients who's object is not the same as the one sending
 the message """
 def broadcast_to_clients(message, connection):
 	for clients in list_of_clients:
-		# print ("3", list_of_clients)
 		if clients != connection:
 			try:
-				# print (message)
 				clients.send(message.encode())
 			except Exception as e:
 				print ("exeption " + e)
 				clients.close()
 				remove(clients)
 
-		# if the link is broken, we remove the client
+			# if the link is broken, we remove the client
 
 """The following function simply removes the object 
 from the list that was created at the beginning of 

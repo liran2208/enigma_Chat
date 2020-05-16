@@ -8,7 +8,7 @@ ref_a = "ejmzalyxvbwfcrquontspikhgd"
 ref_b = "yruhqsldpxngokmiebfzcwvjat"
 ref_c = "fvpjiaoyedrzxwgctkuqsbnmhl"
 
-day_states =  [1, 1, 1]
+day_states = []
 
 def initialize_states(rotors, states):
     """
@@ -16,31 +16,31 @@ def initialize_states(rotors, states):
     :param states:
     :return: set the starting settings of the enigma. it sets daily
     """
-    # global day_states
-    # day_states = states[:]
+    global day_states
+    day_states = states[:]
     
     rotors_lst = []
     for i in rotors:
         if i == 1:
-            rotors_lst.append(rotor_one)
+            rotors_lst.append(rotor_one[:])
         if i == 2:
-            rotors_lst.append(rotor_two)
+            rotors_lst.append(rotor_two[:])
         if i == 3:
-            rotors_lst.append(rotor_three)
+            rotors_lst.append(rotor_three[:])
         if i == 4:
-            rotors_lst.append(rotor_four)
+            rotors_lst.append(rotor_four[:])
         if i == 5:
-            rotors_lst.append(rotor_five)
+            rotors_lst.append(rotor_five[:])
         if i == 'a':
-            rotors_lst.append(ref_a)
+            rotors_lst.append(ref_a[:])
         if i == 'b':
-            rotors_lst.append(ref_b)
+            rotors_lst.append(ref_b[:])
         if i == 'c':
-            rotors_lst.append(ref_c)
+            rotors_lst.append(ref_c[:])
+    
     for i in range(len(rotors)-1):
         rotors_lst[i] = rotors_lst[i][-states[i]+1:] + rotors_lst[i][:-states[i]+1]
-    # print("initialize_states: ", rotors_lst)
-
+    
     return rotors_lst
 
 
@@ -85,7 +85,7 @@ def change_state(r, state):
     :return: rotated string (r), (state) times
     this functions is used to rotate the rotors of the enigma.
     """
-    # changes the state of the rotor once(state++), rotates the string 'r' once
+    # changes the state of the rotor once(state), rotates the string 'r' once
     return r[-state:] + r[:-state]
 
 
@@ -107,9 +107,8 @@ def rotor(rotors, msg, states):
             add_states(states, rotors)
         else:
             output.append(msg[i])
-    # print "inside rotors2: ",  states
+    
     for i in range(len(states)):
-        # print "the states[i] to change back the settings: ", states[i]
         rotors[i] = change_state(rotors[i], 0 - states[i]+1)
     return output
 
@@ -129,26 +128,19 @@ def cypher(msg, rotors, plugboard):
     :param plugboard:
     :return: enigma method encryption message
     """
-    # print (day_states)
     states = day_states[:]
-    # print (states)
-    # print ("rotor_settings = ", rotors)
     lst = [char for char in msg]
-
     for i in range(len(lst)):
         lst[i] = (switchLetters(plugboard, lst[i]))
-
     lst = rotor(rotors, lst, states)
-
     for i in range(len(lst)):
         lst[i] = switchLetters(plugboard, lst[i])
     encrypted = ''.join(lst)
-
     return encrypted
 
 
 def main():
-
+# testing the enigma function
     # ---------------insert here your settings------------------------------
     rotors = [1, 4, 5, 'c']
     rotor_settings = [5, 4, 2]
