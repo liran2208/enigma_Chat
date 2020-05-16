@@ -40,11 +40,14 @@ def main():
     again = True
     while again:
         try: 
-            IP_address = "127.0.0.1" # str(input("Enter the chat's IP: ")) # str(sys.argv[1])
-            Port = 1234 #int(input("Enter the chat's port number: ")) # int(sys.argv[2])
+            
+            IP_address = str(input("Enter the chat's IP: ")) # str(sys.argv[1])
+            Port = int(input("Enter the chat's port number: ")) # int(sys.argv[2])
+            
             my_socket.connect((IP_address, Port))
             again = False
-        except:
+        except Exception as e:
+            print (e)
             system('cls')
             print ("IP/Port not found. please try again")
             again = True

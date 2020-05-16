@@ -8,17 +8,7 @@ ref_a = "ejmzalyxvbwfcrquontspikhgd"
 ref_b = "yruhqsldpxngokmiebfzcwvjat"
 ref_c = "fvpjiaoyedrzxwgctkuqsbnmhl"
 
-rotor_one_reset = "ekmflgdqvzntowyhxuspaibrcj"
-rotor_two_reset = "ajdksiruxblhwtmcqgznpyfvoe"
-rotor_three_reset = "bdfhjlcprtxvznyeiwgakmusqo"
-rotor_four_reset = "esovpzjayquirhxlnftgkdcmwb"
-rotor_five_reset = "vzbrgityupsdnhlxawmjqofeck"
-ref_a_reset = "ejmzalyxvbwfcrquontspikhgd"
-ref_b_reset = "yruhqsldpxngokmiebfzcwvjat"
-ref_c_reset = "fvpjiaoyedrzxwgctkuqsbnmhl"
-reset_list = []
-
-day_states = [1, 1, 1]
+day_states =  [1, 1, 1]
 
 def initialize_states(rotors, states):
     """
@@ -26,8 +16,9 @@ def initialize_states(rotors, states):
     :param states:
     :return: set the starting settings of the enigma. it sets daily
     """
+    # global day_states
     # day_states = states[:]
-
+    
     rotors_lst = []
     for i in rotors:
         if i == 1:
@@ -138,8 +129,10 @@ def cypher(msg, rotors, plugboard):
     :param plugboard:
     :return: enigma method encryption message
     """
+    # print (day_states)
     states = day_states[:]
-    # print "rotor_settings = ", rotor_settings
+    # print (states)
+    # print ("rotor_settings = ", rotors)
     lst = [char for char in msg]
 
     for i in range(len(lst)):
@@ -158,7 +151,7 @@ def main():
 
     # ---------------insert here your settings------------------------------
     rotors = [1, 4, 5, 'c']
-    rotor_settings = [1, 1, 1]
+    rotor_settings = [5, 4, 2]
     plugboard = ["ab", "xy", "hj", "po", "mn", "ld", "qw", "fr", "ev", "zs"]
     rotors = initialize_states(rotors, rotor_settings)
     msg = "xjmsr"

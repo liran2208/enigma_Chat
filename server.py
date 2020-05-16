@@ -7,6 +7,7 @@ import enigma
 from os import system
 
 
+
 """The first argument AF_INET is the address domain of the 
 socket. This is used when we have an Internet Domain with 
 any two hosts The second argument is the type of socket. 
@@ -26,8 +27,7 @@ IP_address = "0.0.0.0"
 # str(sys.argv[1])
 
 # takes second argument from command prompt as port number
-Port = 1234
-# int(sys.argv[2])
+Port = 1234 # int(sys.argv[2])
 
 """ 
 binds the server to an entered IP address and at the 
